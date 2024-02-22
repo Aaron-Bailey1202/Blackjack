@@ -14,44 +14,51 @@ print(logo)
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-
 def blackJack():
-    hit = True
-    bust = False
-    player = random.sample(cards, 2)
-    computer = random.sample(cards, 2)
+    while True:
+        hit = True
+        bust = False
+        player = random.sample(cards, 2)
+        computer = random.sample(cards, 2)
 
-    # while hit is true the player will choose whether to have another card or not, once the player either is finished they can pick 'n'
-    while hit:
-        print(f"You have {player} and the dealer has {computer[0]}")
-        another_card = input("Do you want another card? 'y' or 'n':")
-        if another_card == 'y':
-            player.append(random.choice(cards))
-            # if there is an ace(11) and the player is over 21 the 11 is converted to a 1
-            while sum(player) > 21 and 11 in player:
-                target_index = player.index(11)
-                player[target_index] = 1
-            if sum(player) > 21:
-                print(f"Bust, you lose! {player} {sum(player)}")
+        # Player's turn
+        while hit:
+            print(f"You have {player} and the dealer has {computer[0]}")
+            another_card = input("Do you want another card? 'y' or 'n': ")
+            if another_card == 'y':
+                player.append(random.choice(cards))
+                if sum(player) > 21 and 11 in player:
+                    player[player.index(11)] = 1
+                if sum(player) > 21:
+                    print(f"Bust, you lose! {player} {sum(player)}")
+                    hit = False
+                    bust = True
+            else:
                 hit = False
-                bust = True
-        else:
-            hit = False
-    # if hit is false or the player has not gone bust (over 21) then this will run until the computer has gone above 17
-    if not bust:
-        while sum(computer) < 17:
-            computer.append(random.choice(cards))
-        if sum(player) > 21 and 11 in player:
-            target_index = computer.index(11)
-            computer[target_index] = 1
-        if sum(computer) > 21:
-            print(f"You have {sum(player)} and the dealer has {sum(computer)} you win!")
-        else:
-            print(f"You have {sum(player)} and the dealer has {sum(computer)} you lose!")
 
-    play_again = input("Do you want to play again? 'y' or 'n'")
-    if play_again == 'y':
-        blackJack()
+        if not bust:
+            # Dealer's turn
+            while sum(computer) < 17:
+                computer.append(random.choice(cards))
+            if 11 in computer and sum(computer) > 21:
+                computer[computer.index(11)] = 1
 
+            # Determine the winner
+            player_total = sum(player)
+            computer_total = sum(computer)
+            print(f"You have {player_total} and the dealer has {computer_total}")
+            if player_total > 21:
+                print("You bust! Dealer wins.")
+            elif computer_total > 21 or player_total > computer_total:
+                print("You win!")
+            elif player_total < computer_total:
+                print("Dealer wins.")
+            else:
+                print("It's a tie!")
+
+        play_again = input("Do you want to play again? 'y' or 'n': ")
+        if play_again != 'y':
+            print("Thanks for playing!")
+            break
 
 blackJack()
