@@ -1,17 +1,26 @@
-A simple game of blackjack where the deck is unlimited.
+# Blackjack Game
 
-When running the project you will be given 2 cards and shown 1 card from the computer player.
+This is a simple command-line implementation of the card game Blackjack. In this game, you play against the computer dealer.
 
-You will then have the option of 'y' to have another card dealt or 'n' to stick with what you have.
+## Blackjack House Rules
 
-Any other inputs for this will throw an error.
+- The deck is unlimited in size.
+- There are no jokers.
+- The Jack, Queen, and King all count as 10.
+- The Ace can count as 11 or 1.
+- The cards in the deck have equal probability of being drawn.
+- Cards are not removed from the deck as they are drawn.
 
-If you go over 21 you lose.
+## How to Play
 
-The two scores are compared and if the computer score is better than your score, providing it is under 21 then you lose.
+1. **Run the Game:** Execute the `blackjack.py` script using a Python interpreter.
+2. **Follow On-Screen Prompts:** The game will guide you through each step of playing Blackjack, including choosing whether to draw additional cards, and determining the outcome of the game.
+3. **Restart:** If you want to play again after finishing a game, simply respond "y" when asked if you want to play again.
 
-If your score is better than the computers score, providing it is under 21 you win.
+## Dependencies
 
-You are then presented with the option to play again 'y' resets the game and gives you new cards, 'n' ends the game.
+- Python 3.x
 
-Any other input will throw an error and end the game
+## Acknowledgments
+
+- ASCII art for the game logo is provided by the `art` module.
